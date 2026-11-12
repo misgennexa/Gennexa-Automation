@@ -1,0 +1,162 @@
+{
+  "templates": {
+    "npa_ftd_call_report": {
+      "name": "NPA FTD Call Report",
+      "file": "C:\\Users\\Karthick.R\\.gemini\\antigravity\\scratch\\nexgen\\templates\\npa_ftd_call_report.xlsx",
+      "schema": {
+        "sheets": {
+          "Dashboard": {
+            "headers": [
+              "NPA-Region Wise-Call Report",
+              "NPA-TL Wise-Call Report"
+            ],
+            "formula_cols": {},
+            "data_start_row": 3
+          },
+          "Apr": {
+            "headers": [
+              "Campaign",
+              "Team Lead",
+              "Date",
+              "UserName",
+              "Agent Name",
+              "Total Calls",
+              "Calls Answered",
+              "CIG",
+              "ACD Time",
+              "Talk Time",
+              "Avg TT Time",
+              "Call Withdrawal Time",
+              "Avg Call Withdrawal Time",
+              "Avg Handling Time",
+              "Agent Ring Time",
+              "Held Calls",
+              "Hold Time",
+              "Avg Hold Time",
+              "Staff Time",
+              "Available Time",
+              "Break Time",
+              "Quality",
+              "Tea",
+              "Lunch",
+              "Morning Meeting",
+              "Training",
+              "HR Meeting",
+              "Bio",
+              "Meeting\u00c2",
+              "Login Time",
+              "Occupancy",
+              "Idle Time",
+              "Tos"
+            ],
+            "formula_cols": {
+              "Campaign": "=IFERROR(_xlfn.XLOOKUP(Table3[[#This Row],[UserName]],RAW!A:A,RAW!J:J),\"\")",
+              "Team Lead": "=IFERROR(_xlfn.XLOOKUP(Table3[[#This Row],[UserName]],RAW!A:A,RAW!B:B),\"\")",
+              "Calls Answered": "=SUMIFS(Table1[Unique ID],Table1[Date],Table3[[#This Row],[Date]],Table1[User ID],Table3[[#This Row],[UserName]],Table1[Call Status],\"CONNECT\",Table1[Unique ID],1)",
+              "CIG": "=SUMIFS(RAW!F:F,RAW!I:I,Table3[[#This Row],[Date]],RAW!A:A,Table3[[#This Row],[UserName]],RAW!H:H,1)",
+              "Tos": "=Table3[[#This Row],[Staff Time]]-(Table3[[#This Row],[Tea]]+Table3[[#This Row],[Lunch]]+Table3[[#This Row],[Bio]])"
+            },
+            "data_start_row": 2
+          },
+          "RAW": {
+            "headers": [
+              "User ID",
+              "Team Lead",
+              "UID",
+              "Branch Code",
+              "Customer Status",
+              "CIG",
+              "Call Status",
+              "Unique ID",
+              "Date",
+              "No",
+              "Phone Number",
+              "RecID",
+              "Added On",
+              "Status",
+              "Called Time",
+              "Previous Month Last Connected Time",
+              "Call Type",
+              "Accepted Key",
+              "UserName",
+              "Agent Call Duration",
+              "Agent Call Withdrawal Time",
+              "Callback Time",
+              "Assigned To(UserName)",
+              "Assigned To(Real Name)",
+              "Assigned By(UserName)",
+              "Assigned By(Real Name)",
+              "Assigned On",
+              "Disposition Remarks",
+              "CUST_ID",
+              "CUST_NAME",
+              "BRANCH_CODE",
+              "BRANCH_NAME",
+              "REGION",
+              "ZONE1",
+              "SCHEME",
+              "LOAN_NO",
+              "LOAN_DATE",
+              "NET_WEIGHT",
+              "LOAN_AMOUNT",
+              "BALANCE_AMOUNT",
+              "INTEREST_DUE",
+              "TOTAL_DUES",
+              "ARC_STATUS",
+              "ADDITIONAL_AMOUNT_REQUIRED_FOR_RENEWAL",
+              "ADDITIONAL_GOLD_REQUIRED_FOR_RENEWAL",
+              "CATAGORY",
+              "CATEGORY2",
+              "NPALOANID",
+              "RefID",
+              "PrimaryNo",
+              "Secondary",
+              "PrimaryFlag",
+              "Customer_Status",
+              "Cust_status",
+              "Comments",
+              "CUSTOMERCLUB",
+              "Customer_NCS",
+              "Customer_NCS2",
+              "SMS_PUSHED",
+              "Verified Customer"
+            ],
+            "formula_cols": {
+              "User ID": "=IF(OR(S2=\"\", S2=\"-\", ISBLANK(S2)),\n    \"NoEID\",\n    IF(S2=\"not used\",\n        SUBSTITUTE(LEFT(W2,6),\" \",\"\"),\n        SUBSTITUTE(LEFT(S2,6),\" \",\"\")\n    )\n)",
+              "Team Lead": "=IFERROR(_xlfn.XLOOKUP(Table1[[#This Row],[User ID]],'Lookup page'!J:J,'Lookup page'!N:N),\"\")",
+              "UID": "=IFERROR(CONCATENATE(Table1[[#This Row],[Branch Code]],Table1[[#This Row],[SCHEME]],Table1[[#This Row],[LOAN_NO]]),0)",
+              "Branch Code": "=IFERROR(_xlfn.XLOOKUP(Table1[[#This Row],[BRANCH_NAME]],'Lookup page'!B:B,'Lookup page'!A:A),0)",
+              "Customer Status": "=IF(Table1[[#This Row],[Customer_Status]]=\"\",\"Non contactable\", Table1[[#This Row],[Customer_Status]])",
+              "CIG": "=COUNTIF(Table1[[#This Row],[Customer Status]],\"Complete Info Given\")",
+              "Call Status": "=_xlfn.XLOOKUP(Table1[[#This Row],[Customer Status]],'Lookup page'!E:E,'Lookup page'!F:F)",
+              "Unique ID": "=IF(COUNTIF($C$2:$C$44086, C2)=1, 1, IF(AND(COUNTIF($C$2:C2, C2)=1, G2<>\"Connect\"), 1, IF(AND(G2=\"Connect\", COUNTIF($C$2:C2, C2)=1), 1, 0)))",
+              "Date": "=INT(Table1[[#This Row],[Called Time]])",
+              "Verified Customer": "=COUNTIF(Table1[[#This Row],[Cust_status]],\"Verified Customer\")"
+            },
+            "data_start_row": 2
+          },
+          "Lookup page": {
+            "headers": [
+              "BRANCH_CODE",
+              "BRANCH_NAME",
+              "Customer_Status",
+              "Call Type",
+              "Tag",
+              "User ID",
+              "Agent Name",
+              "Product/Campaign",
+              "Camp",
+              "Team Leader"
+            ],
+            "formula_cols": {},
+            "data_start_row": 2
+          }
+        }
+      },
+      "sheet": "Dashboard",
+      "saved_at": "2026-10-29 17:57:26.531605"
+    }
+  },
+  "thresholds": {},
+  "active_template": "npa_ftd_call_report"
+}

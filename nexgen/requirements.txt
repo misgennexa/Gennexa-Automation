@@ -1,0 +1,10 @@
+# streamlit pinned below 1.50: the app uses use_container_width, which newer releases deprecate/remove
+streamlit>=1.38.0,<1.50
+pandas>=2.0.0
+numpy>=1.26.0
+openpyxl>=3.1.0
+plotly>=5.18.0
+reportlab>=4.0.0
+xlrd>=2.0.1
+watchdog>=4.0.0
+pywin32>=306
